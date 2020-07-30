@@ -14,6 +14,7 @@ namespace ConferenceTracker
 {
     public class Startup
     {
+        private readonly string _allowedOrigins = "_allowedOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
