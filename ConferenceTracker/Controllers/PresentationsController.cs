@@ -71,16 +71,17 @@ namespace ConferenceTracker.Controllers
             _logger.LogInformation("Getting presentation id: " + id + " for edit.");
             if (id == null)
             {
-                _logger.LogWarning("Presentation id," + id + ", was not found.")
+                _logger.LogError("Presentation id was null");
                 return NotFound();
             }
 
             var presentation = _presentationRepository.GetPresentation((int)id);
             if (presentation == null)
             {
+                _logger.LogWarning("Presentation id," + id + ", was not found.");
                 return NotFound();
             }
-            _logger.LogInformation("Presentation id," + id + ", was not found. Returning 'Edit View' ");
+            _logger.LogInformation("Presentation id," + id + ", was found. Returning 'Edit View' ");
             ViewData["SpeakerId"] = new SelectList(_speakerRepository.GetAllSpeakers(), "Id", "Id", presentation?.SpeakerId);
             return View(presentation);
         }
