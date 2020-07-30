@@ -34,6 +34,13 @@ namespace ConferenceTracker
             services.AddRazorPages();
             services.AddTransient<IPresentationRepository, PresentationRepository>();
             services.AddTransient<ISpeakerRepository, SpeakerRepository>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(_allowedOrigins, builder =>
+            {
+                builder.WithOrigins("http://pluralsight.com");
+            });
+            });
         }
 
 
